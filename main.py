@@ -1,10 +1,9 @@
-
 from paymentbot import *
 
 def main() -> None:
     """Run the bot."""
     # Create the Application and pass it your bot's token.
-    application = Application.builder().token("5753922484:AAFXVAmUXYikBEik1Y71XVx2BnkEiYSG7FM").build()
+    application = Application.builder().token("5702149173:AAF9mhZa26GMxoa-E-Iq5wruldou7dTey30").build()
 
     # simple start function
     application.add_handler(CommandHandler("start", start_callback))

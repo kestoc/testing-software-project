@@ -36,7 +36,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-PAYMENT_PROVIDER_TOKEN = "284685063:TEST:NTczNmQzNDhiMmUy"
+PAYMENT_PROVIDER_TOKEN = "284685063:TEST:NjM3YzhjMTg3NTVj"
 
 
 async def start_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
