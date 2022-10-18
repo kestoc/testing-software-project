@@ -2,8 +2,8 @@
 Bot para tienda virtual en Telegram desarrollada por @kestoc y @rohaquinlop
 """
 
+import json
 import logging
-
 from telegram import __version__ as TG_VER
 
 try:
@@ -17,7 +17,7 @@ if __version_info__ < (20, 0, 0, "alpha", 1):
         f"{TG_VER} version of this example, "
         f"visit https://docs.python-telegram-bot.org/en/v{TG_VER}/examples.html"
     )
-from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
 from telegram.ext import (
     Application,
     CommandHandler,
@@ -25,6 +25,7 @@ from telegram.ext import (
     ConversationHandler,
     MessageHandler,
     filters,
+    PicklePersistence
 )
 
 # Enable logging
@@ -33,25 +34,32 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+
+db = json.load(open('db.json'))
+
 EXIT, BUY = range(2)
 
 async def start(update : Update, context: ContextTypes.DEFAULT_TYPE) -> int:
   """Starts the conversation and asks the type of product that the user will buy"""
   
-  replyKeyboard = [["t-shirt", "pants", "shoes", "computer", "car"]]
+  products_list = []
   
   await update.message.reply_text(
     "Hola! Bienvenido a KR-Shop, yo soy el bot que te estara atendiendo.\n"
     "Envia /cancel en cualquier momento para detener el proceso de compra.\n"
     "Que producto deseas comprar?",
-    reply_markup=ReplyKeyboardMarkup(
-      replyKeyboard, one_time_keyboard=False, input_field_placeholder="Que producto deseas comprar?"
-    )
+    reply_markup=build_keyboard(products_list)
   )
   
   await update.message.reply_text(update.message)
   
   return BUY
+
+def build_keyboard(current_list : list[str]) -> InlineKeyboardMarkup:
+  print(db)
+  return InlineKeyboardMarkup.from_column(
+    [InlineKeyboardButton(producto, callback_data=(producto, current_list)) for producto in db['productos']]
+  )
 
 async def buy(update : Update, context: ContextTypes.DEFAULT_TYPE) -> int:
   user = update.message.from_user

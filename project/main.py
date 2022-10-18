@@ -1,7 +1,8 @@
 from tiendavirtual import *
 
 def main() -> None:
-  app = Application.builder().token("5564690109:AAHStdlo-Pt73uW1aOZMQgJ6xt4oDC41JUU").build()
+  persistence = PicklePersistence(filepath="databot")
+  app = Application.builder().token("5564690109:AAHStdlo-Pt73uW1aOZMQgJ6xt4oDC41JUU").persistence(persistence).arbitrary_callback_data(True).build()
   
   convHandler = ConversationHandler(
     entry_points = [CommandHandler("start", start)],

@@ -1,0 +1,37 @@
+{
+  "productos" : {
+    "t-shirt" : {
+      "price" : 100.00
+    },
+    "pants" : {
+      "price" : 150.00
+    },
+    "shoes" : {
+      "price" : 250.00
+    },
+    "computer" : {
+      "price" : 2000.00
+    },
+    "cell-phone" : {
+      "price" : 1500.00
+    },
+    "headphones" : {
+      "price" : 600.00
+    },
+    "car" : {
+      "price" : 40000.00
+    },
+    "motorcycle" : {
+      "price" : 20000.00
+    },
+    "gardening-kit" : {
+      "price" : 40.00
+    },
+    "kitchen-kit" : {
+      "price" : 80.00
+    },
+    "otro" : {
+      "price" : 0
+    }
+  }
+}
